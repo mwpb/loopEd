@@ -1,5 +1,14 @@
 var ipcRenderer = require(`electron`).ipcRenderer;
 
+function openDialog(filename) {
+	ipcRenderer.send('openDialog', 'setEd');
+}
+
+ipcRenderer.on('setEd', function(event, data) {
+	var ed = document.getElementById('ed');
+	ed.value = data.filestring;
+})
+
 function getHTML() {
 	var body =  document.body.innerHTML;
 	var ed = document.getElementById('ed');
