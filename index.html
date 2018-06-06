@@ -2,15 +2,31 @@
 <html>
 <head>
 	<title>Loop Ed</title>
+	<link rel="stylesheet" type="text/css" href="./style.css">
+	<link rel="stylesheet" type="text/css" href="./node_modules/dragula/dist/dragula.min.css">
 </head>
 <body>
-<textarea id="ed">
-	Evaluation area.
-</textarea>
+	<button onclick="executeArea();">Execute</button>
+	<button onclick="getHTML();">Get HTML</button>
+	<button onclick="setHTML();">Set HTML</button>
+	<button onclick="openDialog();">Open</button>
+	<div id='whiteboard'>
+		<div class='ed-container'>
+			<textarea class='editor' id="ed">
+				Evaluation area.
+			</textarea>
+		</div>
+		<div class='ed-container'>
+			<textarea class='editor' id="ed2">
+				Evaluation area.
+			</textarea>
+		</div>
+	</div>
 <script src="./renderer.js"></script>
-<button onclick="executeArea();">Execute</button>
-<button onclick="getHTML();">Get HTML</button>
-<button onclick="setHTML();">Set HTML</button>
-<button onclick="openDialog();">Open</button>
+
+<script src='./node_modules/dragula/dist/dragula.min.js'></script>
+<script type="text/javascript">
+	dragula([document.getElementById('whiteboard')]);
+</script>
 </body>
 </html>
