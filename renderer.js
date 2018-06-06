@@ -1,13 +1,17 @@
 var ipcRenderer = require(`electron`).ipcRenderer;
+const opener = require('electron').remote.require('./fileUtils.js');
 
-function openDialog(filename) {
-	ipcRenderer.send('openDialog', 'setEd');
+function openDialog() {
+	opener.openDialog().then(function(file){
+		var ed = document.getElementById('ed');
+		ed.value = file.filestring;
+	})
 }
 
-ipcRenderer.on('setEd', function(event, data) {
-	var ed = document.getElementById('ed');
-	ed.value = data.filestring;
-})
+// ipcRenderer.on('setEd', function(event, data) {
+// 	var ed = document.getElementById('ed');
+// 	ed.value = data.filestring;
+// })
 
 function getHTML() {
 	var body =  document.body.innerHTML;
