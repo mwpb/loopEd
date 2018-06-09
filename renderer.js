@@ -1,11 +1,18 @@
 var ipcRenderer = require(`electron`).ipcRenderer;
-const opener = require('electron').remote.require('./fileUtils.js');
+const opener = require('./fileUtils.js');
+const readFileAsync = require('./fileUtils.js').readFileAsync;
 
-function openDialog() {
-	opener.openDialog().then(function(file){
-		var ed = document.getElementById('ed');
-		ed.value = file.filestring;
-	})
+function readFile(filepath) {
+	readFileAsync(filepath).then((data) =>
+		{
+			return data;
+		})
+}
+
+async function openDialog() {
+	var filedata = await opener.openDialog();
+	var ed = document.getElementById('ed');
+	ed.value = filedata.filestring;
 }
 
 function getHTML() {

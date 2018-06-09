@@ -3,7 +3,7 @@ const Menu = require('electron').Menu
 const path = require('path')
 const url = require('url')
 var ipcMain = require('electron').ipcMain;
-var fileUtils = require('./fileUtils.js');
+// var fileUtils = require('./fileUtils.js');
 
 function createWindow () {
   // Create the browser window.

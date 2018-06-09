@@ -13,7 +13,10 @@
 	<div id='whiteboard'>
 		<div class='ed-container'>
 			<textarea class='editor' id="ed">
-				Evaluation area.
+				(async function() {
+					var filedata = await readFileAsync('/Users/mat/loop-ed/index.js');
+					console.log(filedata.filestring.toString());
+				})();
 			</textarea>
 		</div>
 		<div class='ed-container'>
