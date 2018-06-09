@@ -1,6 +1,6 @@
-var ipcRenderer = require(`electron`).ipcRenderer;
 const opener = require('./fileUtils.js');
 const readFileAsync = require('./fileUtils.js').readFileAsync;
+const {BrowserWindow} = require('electron').remote;
 
 function readFile(filepath) {
 	readFileAsync(filepath).then((data) =>
@@ -28,5 +28,6 @@ function setHTML() {
 
 function executeArea() {
 	var ed = document.getElementById('ed');
-	eval(ed.value);
+	var win = BrowserWindow.getFocusedWindow().webContents
+	win.webContents.executeJavaScript(ed.value);
 }

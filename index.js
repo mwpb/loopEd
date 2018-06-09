@@ -16,6 +16,7 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
+  win.webContents.openDevTools({mode:'bottom'});
   win.maximize();
 }
 

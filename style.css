@@ -1,4 +1,22 @@
 .editor {
-	width: 80ch;
-	height: 80ch;
+	/*width: 80ch;*/
+	height: 100vh;
+}
+#whole {
+	display:grid;
+	grid-template-columns: 300px 1fr;
+}
+#whiteboard {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+.grabber {
+	background-color: black;
+}
+.ed-container {
+	display: grid;
+	grid-template-rows: 15px 1fr;
+}
+#main {
+	height: 100vh;
 }
