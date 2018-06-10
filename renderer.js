@@ -1,6 +1,7 @@
 const opener = require('./fileUtils.js');
 const readFileAsync = require('./fileUtils.js').readFileAsync;
 const {BrowserWindow} = require('electron').remote;
+const {createED, executeArea} = require('./ed.js');
 
 function readFile(filepath) {
 	readFileAsync(filepath).then((data) =>
@@ -26,8 +27,3 @@ function setHTML() {
 	document.body.innerHTML = newHTML;
 }
 
-function executeArea() {
-	var ed = document.getElementById('ed');
-	var win = BrowserWindow.getFocusedWindow().webContents
-	win.webContents.executeJavaScript(ed.value);
-}
