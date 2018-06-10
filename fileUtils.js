@@ -28,11 +28,16 @@ function openFilePromise(){
 	})
 }
 
+function read(filepath){
+	return fs.readFileSync(filepath).toString()
+}
+
 async function opener(){
 	return await openFilePromise();
 }
 
 module.exports = {
 	"openDialog":opener,
-	"readFileAsync":readFilePromise
+	"readFileAsync":readFilePromise,
+	"read":read
 }

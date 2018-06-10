@@ -1,7 +1,6 @@
-const opener = require('./fileUtils.js');
-const readFileAsync = require('./fileUtils.js').readFileAsync;
+const {readFileAsync, read, opener} = require('./fileUtils.js');
 const {BrowserWindow} = require('electron').remote;
-const {createED, executeArea} = require('./ed.js');
+const {createED, executeArea, open, editSessions} = require('./ed.js');
 
 function readFile(filepath) {
 	readFileAsync(filepath).then((data) =>
@@ -27,3 +26,6 @@ function setHTML() {
 	document.body.innerHTML = newHTML;
 }
 
+function print(messagestring){
+	console.log(messagestring);
+}

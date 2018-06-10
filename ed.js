@@ -1,9 +1,13 @@
 var ace = require('ace-builds/src-min-noconflict/ace.js');
 var extLangTools = require('ace-builds/src-min-noconflict/ext-language_tools.js');
 const path = require('path')
+const {read} = require('./fileUtils.js');
 
-function executeArea() {
-	var ed = ace.edit('ed');
+var editSessions = [];
+var currentFilePath = '';
+
+function executeArea(divName) {
+	var ed = ace.edit(divName);
 	var win = BrowserWindow.getFocusedWindow().webContents
 	win.webContents.executeJavaScript(ed.getValue());
 }
@@ -12,8 +16,7 @@ function createED(divName){
 	console.log('did mount');
 	ace.config.set('basePath', 'node_modules/ace-builds/src-min-noconflict');
 	ace.require("ace/ext/language_tools");
-    editor = ace.edit(divName);
-    ed = editor;
+    var editor = ace.edit(divName);
     editor.session.setMode("ace/mode/javascript");
     editor.setTheme("ace/theme/monokai");
     editor.setOptions({
@@ -23,9 +26,47 @@ function createED(divName){
     });
 }
 
+function changeSession(filepath) {
+	var ses = editSessions[filepath];
+	currentFilePath = filepath;
+	editor.setSession(ses);
+	editor.focus();
+}
+
+function open(filepath){
+	if (editSessions[filepath]) {
+        changeSession(filepath);
+    }
+    else {
+    	var editor = ace.edit(document.activeElement.parentElement.id);
+    	var filestring = read(filepath);
+        var extn = path.extname(filepath);
+        var language = "javascript"
+        if (extn == ".js") { language = "javascript"}
+        else if (extn == ".html") { language = "html"}
+        else if (extn == ".py") { language = "python"}
+        else if (extn == ".css") { language = "css"}
+        else if (extn == ".md") { language = "markdown"}
+        else if (extn == ".markdown") { language = "markdown"}
+        else if (extn == ".tex") { language = "tex"}
+        var ses = ace.createEditSession(filestring, 'ace/mode/'+language);
+        editSessions[filepath] = ses;
+        currentFilePath = filepath;
+        editor.setSession(ses);
+        editor.gotoLine(0);
+        editor.focus();
+        // tabs.addTab(filepath);
+    }
+}
+
+function save(divName){
+	var ses = ace.edit(divName).getSession();
+}
+
 module.exports = {
 	createED:createED,
-	executeArea:executeArea
+	executeArea:executeArea,
+	open:open
 };
 // sesList = []
 // // ed = false
@@ -40,14 +81,14 @@ module.exports = {
 // 	mounted:function(){
 		
 // 	},
-// 	addSession: function(filename, dataString) {
+// 	addSession: function(filepath, dataString) {
 // 		console.log(this.data().editor);
-// 		if (this.data().sessions[filename]) {
-// 	        this.changeSession(filename);
+// 		if (this.data().sessions[filepath]) {
+// 	        this.changeSession(filepath);
 // 	    }
 // 	    else {
-// 	        var extn = path.extname(filename);
-// 	        var currentFilePath = filename;
+// 	        var extn = path.extname(filepath);
+// 	        var currentFilePath = filepath;
 // 	        var language = "javascript"
 // 	        if (extn == ".js") { language = "javascript"}
 // 	        else if (extn == ".html") { language = "html"}
@@ -57,13 +98,13 @@ module.exports = {
 // 	        else if (extn == ".markdown") { language = "markdown"}
 // 	        else if (extn == ".tex") { language = "tex"}
 // 	        var ses = ace.createEditSession(dataString, 'ace/mode/'+language);
-// 	        sesList[filename] = ses;
+// 	        sesList[filepath] = ses;
 // 	        console.log('editor')
 // 	        console.log(editor)
 // 	        editor.setSession(ses);
 // 	        editor.gotoLine(0);
 // 	        editor.focus();
-// 	        tabs.addTab(filename);
+// 	        tabs.addTab(filepath);
 // 	    }
 // 	},		
 //  	changeSession(name) {
