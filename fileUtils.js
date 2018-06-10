@@ -28,6 +28,12 @@ function openFilePromise(){
 	})
 }
 
+function write(filepath, filestring) {
+	print(filepath)
+	print(filestring)
+	fs.writeFileSync(filepath, filestring);
+}
+
 function read(filepath){
 	return fs.readFileSync(filepath).toString()
 }
@@ -37,7 +43,8 @@ async function opener(){
 }
 
 module.exports = {
-	"openDialog":opener,
-	"readFileAsync":readFilePromise,
-	"read":read
+	openDialog:opener,
+	readFileAsync:readFilePromise,
+	read:read,
+	write:write
 }

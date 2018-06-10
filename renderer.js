@@ -1,6 +1,6 @@
-const {readFileAsync, read, opener} = require('./fileUtils.js');
+const {readFileAsync, read, write, opener} = require('./fileUtils.js');
 const {BrowserWindow} = require('electron').remote;
-const {createED, executeArea, open, editSessions} = require('./ed.js');
+const {createED, executeArea, open, editSessions, save} = require('./ed.js');
 
 function readFile(filepath) {
 	readFileAsync(filepath).then((data) =>

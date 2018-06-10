@@ -3,28 +3,22 @@
 <head>
 	<title>Loop Ed</title>
 	<link rel="stylesheet" type="text/css" href="./style.css">
-	<link rel="stylesheet" type="text/css" href="./node_modules/dragula/dist/dragula.min.css">
-	<script src="./webcomponents.js"></script>
+	<!-- <link rel="stylesheet" type="text/css" href="./node_modules/dragula/dist/dragula.min.css"> -->
 	<script src="./renderer.js"></script>
 </head>
 <body>
-	<div id='app'>
-	<link rel='import' href='./second.html'>
-	<second></second>
-
-
 	<button onclick="executeArea();">Execute</button>
 	<button onclick="getHTML();">Get HTML</button>
 	<button onclick="setHTML();">Set HTML</button>
 	<button onclick="openDialog();">Open</button>
-	<second></second>
 	<div id='whole'>
 		<div id='sidebar'>
 			THis is a sidebar
 		</div>
 		<div id='main'>
 			<div id='whiteboard'>
-				<div id='ed'></div>
+				<div><textarea>A scratch buffer.</textarea></div>
+				<div><textarea>A scratch buffer.</textarea></div>
 				<!-- <div class='ed-container'>
 					<div class='grabber'></div>
 					<textarea class='editor'>
