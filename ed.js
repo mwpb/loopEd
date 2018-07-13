@@ -2,6 +2,8 @@ var ace = require('ace-builds/src-min-noconflict/ace.js');
 var extLangTools = require('ace-builds/src-min-noconflict/ext-language_tools.js');
 const path = require('path')
 const {read, write} = require('./fileUtils.js');
+const remote = require('electron').remote;
+
 
 var editSessions = [];
 // var currentFilePath = '';
@@ -18,28 +20,23 @@ function executeArea() {
 	}
 }
 
-function createED(){
-	var active = document.activeElement;
-	var parent = active.parentElement;
-	if (active.tagName != 'TEXTAREA') {
-		print('active element is not a textarea; please replace a textarea with ace')
-	}
-	else if (parent.tagName != 'DIV') {
-		print('parent element of active element is not a div; please select a textarea contained in a div')
-	}
-	else {
-		ace.config.set('basePath', 'node_modules/ace-builds/src-min-noconflict');
-		ace.require("ace/ext/language_tools");
-	    var editor = ace.edit(active.parentElement);
-	    editor.session.setMode("ace/mode/javascript");
-	    editor.setTheme("ace/theme/monokai");
-	    editor.setOptions({
-	        enableBasicAutocompletion: true,
-	        enableSnippets: true,
-	        enableLiveAutocompletion: false
-	    });
-	    editor.focus();
-	}
+function createED(id){
+	ace.config.set('basePath', 'node_modules/ace-builds/src-min-noconflict');
+	ace.require("ace/ext/language_tools");
+    var editor = ace.edit(document.getElementById(id));
+    editor.session.setMode("ace/mode/javascript");
+    editor.setTheme("ace/theme/monokai");
+    editor.setOptions({
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: false
+    });
+	editor.on('focus', function(){
+		currentAceEditor = editor;
+	})
+    editor.focus();
+    var win = remote.getCurrentWindow();
+    win.focus()
 }
 
 function changeSession(filepath) {

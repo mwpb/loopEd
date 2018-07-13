@@ -3,7 +3,20 @@ const Menu = require('electron').Menu
 const path = require('path')
 const url = require('url')
 var ipcMain = require('electron').ipcMain;
-// var fileUtils = require('./fileUtils.js');
+
+var template = [{},{
+	label:'File',
+	submenu:[{
+		label:'Toggle Dev Tools',
+		role:'toggleDevTools'
+	},
+	{
+		label:'Quit',
+		role:'quit'
+	}]
+}]
+
+global.menu = Menu.buildFromTemplate(template)
 
 function createWindow () {
   // Create the browser window.
@@ -18,6 +31,7 @@ function createWindow () {
   }))
   win.webContents.openDevTools({mode:'bottom'});
   win.maximize();
+  Menu.setApplicationMenu(global.menu);
 }
 
 app.on('ready', createWindow)
