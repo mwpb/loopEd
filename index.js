@@ -29,6 +29,13 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
+  init = true
+  win.webContents.on('devtools-opened', () => {
+	  if(init == true){
+		  win.webContents.focus();	  	
+	  }
+	  init = false;
+  });
   win.webContents.openDevTools({mode:'bottom'});
   win.maximize();
   Menu.setApplicationMenu(global.menu);
