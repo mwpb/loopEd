@@ -8,13 +8,37 @@
 }
 #sidebar {
 	grid-column:1;
-	min-height: 90vh;
+	min-height: 95vh;
 }
-#left {
+#leftWhole {
 	grid-column:2;
-	min-height: 90vh;
+	min-height: 95vh;
+	display:grid;
+	grid-auto-rows:5px 25px 1fr;
+	border: 1px solid silver;
 }
-#right {
+#rightWhole {
 	grid-column:3;
 	min-height: 90vh;
+	display:grid;
+	grid-auto-rows:5px 25px 1fr;
+	border: 1px solid silver;
+}
+#left{
+	grid-row:3;
+	min-height: 90vh;
+}
+#right{
+	grid-row:3;
+	min-height: 90vh;
+}
+#leftTitle{
+	grid-row:2;
+	text-align:center;
+	border-bottom:1px solid silver;
+}
+#rightTitle{
+	grid-row:2;
+	text-align:center;
+	border-bottom:1px solid silver;
 }

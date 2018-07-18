@@ -11,7 +11,7 @@ function createED(id){
     var editor = ace.edit(document.getElementById(id));
     editor.session.setMode("ace/mode/javascript");
 	editor.setShowPrintMargin(false);
-    editor.setTheme("ace/theme/monokai");
+    editor.setTheme("ace/theme/chrome");
     editor.setOptions({
         enableBasicAutocompletion: true,
         enableSnippets: true,
@@ -27,12 +27,13 @@ function createED(id){
 
 function changeSession(filepath) {
 	var ses = editSessions[filepath];
+	var titleDiv = document.getElementById(currentEditor.container.id+'Title')
+	titleDiv.innerHTML = filepath
 	currentEditor.setSession(ses);
 }
 
 function open(filepath = ""){
 	if (filepath == "") {
-		console.log('ok')
 		require('electron').remote.dialog.showOpenDialog(function (filenames) {
 			if (filenames === undefined) {reject('filenames undefined')};
 			var filename = filenames[0];
@@ -48,8 +49,9 @@ function open(filepath = ""){
 			filepath = loc.substring(0, loc.lastIndexOf('/'))+'/'+filepath
 			console.log(filepath)
 		}
-		
    		var editor = currentEditor
+		var titleDiv = document.getElementById(editor.container.id+'Title')
+		titleDiv.innerHTML = filepath
 	  	var filestring = read(filepath);
 	  	var extn = path.extname(filepath);
 	  	var language = "javascript"
