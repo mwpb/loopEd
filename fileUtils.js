@@ -12,8 +12,6 @@ function read(filepath){
 }
 
 module.exports = {
-	// openDialog:opener,
-	// readFileAsync:readFilePromise,
-	read:read,
+    read:read,
 	write:write
 }

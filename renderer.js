@@ -37,7 +37,9 @@ function execute(){
 		selectionRange.start.column = 0;
 		line = editor.session.getTextRange(selectionRange);
 		index = line.lastIndexOf(' ')
-		if (index) {
+		console.log(index)
+		if (index>-2) {
+		    console.log('trimming')
 			selectionRange.start.column = index
 			content = editor.session.getTextRange(selectionRange);
 			console.log(content)
@@ -71,6 +73,9 @@ function execute(){
 
 require('electron').remote.globalShortcut.register('CommandOrControl+Enter', () => {
 	execute()
+})
+require('electron').remote.globalShortcut.register('CommandOrControl+;', () => {
+	require('electron').remote.getCurrentWindow().devToolsWebContents.focus();
 })
 
 var main = document.getElementById('main');
