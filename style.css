@@ -1,16 +1,20 @@
 #main {
 	display:grid;
-	grid-auto-columns:1fr 1fr;
+	grid-auto-columns:1fr 3fr 3fr;
 	grid-gap:10px;
-	height:100vh;
-	width:100vw;
+	height:95vh;
+	width:95vw;
 	align-items:stretch;
 }
-#left {
+#sidebar {
 	grid-column:1;
-	min-height: 100vh;
+	min-height: 90vh;
+}
+#left {
+	grid-column:2;
+	min-height: 90vh;
 }
 #right {
-	grid-column:2;
-	min-height: 100vh;
+	grid-column:3;
+	min-height: 90vh;
 }

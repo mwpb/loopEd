@@ -10,6 +10,7 @@ function createED(id){
 	ace.require("ace/ext/language_tools");
     var editor = ace.edit(document.getElementById(id));
     editor.session.setMode("ace/mode/javascript");
+	editor.setShowPrintMargin(false);
     editor.setTheme("ace/theme/monokai");
     editor.setOptions({
         enableBasicAutocompletion: true,
@@ -42,6 +43,12 @@ function open(filepath = ""){
         changeSession(filepath);
     }
     else {
+		if (filepath.startsWith('/') == false) {
+			loc = window.location.pathname
+			filepath = loc.substring(0, loc.lastIndexOf('/'))+'/'+filepath
+			console.log(filepath)
+		}
+		
    		var editor = currentEditor
 	  	var filestring = read(filepath);
 	  	var extn = path.extname(filepath);
