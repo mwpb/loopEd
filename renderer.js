@@ -8,6 +8,7 @@ function print(messagestring){
 }
 
 var currentEditor = {}
+var prevEditor = {}
 
 const obj = {}
 const handler = {
@@ -80,6 +81,16 @@ require('electron').remote.globalShortcut.register('CommandOrControl+w', () => {
 })
 require('electron').remote.globalShortcut.register('CommandOrControl+s', () => {
 	save();
+})
+require('electron').remote.globalShortcut.register('CommandOrControl+Shift+[', () => {
+	prevEditor.focus();
+    var win = require('electron').remote.getCurrentWindow();
+    win.webContents.focus()
+})
+require('electron').remote.globalShortcut.register('CommandOrControl+Shift+]', () => {
+	prevEditor.focus();
+    var win = require('electron').remote.getCurrentWindow();
+    win.webContents.focus()
 })
 
 var main = document.getElementById('main');

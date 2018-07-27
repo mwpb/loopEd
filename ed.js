@@ -18,7 +18,11 @@ function createED(id){
         enableLiveAutocompletion: false
     });
 	editor.on('focus', function(){
-		currentEditor = editor;
+	    if (editor.id == currentEditor.id){}
+	    else{
+	        prevEditor = currentEditor;
+		    currentEditor = editor;
+	    }
 	})
     editor.focus();
     var win = remote.getCurrentWindow();
