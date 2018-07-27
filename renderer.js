@@ -33,20 +33,16 @@ function execute(){
 	selectionRange.start.column = Math.max(selectionRange.start.column-1,0)
 	prevCharacter = editor.session.getTextRange(selectionRange);
 	if (prevCharacter == ')') {
-		console.log('getting single command.')
 		selectionRange.start.column = 0;
 		line = editor.session.getTextRange(selectionRange);
 		index = line.lastIndexOf(' ')
-		console.log(index)
+// 		console.log(index)
 		if (index>-2) {
-		    console.log('trimming')
 			selectionRange.start.column = index
 			content = editor.session.getTextRange(selectionRange);
-			console.log(content)
 			var range = editor.selection.getRange()
 			range.start.column = index
 			editor.session.replace(range,'')
-			console.log(range)
 			var win = BrowserWindow.getFocusedWindow().webContents
 			win.webContents.executeJavaScript(content);	
 		}
@@ -55,7 +51,6 @@ function execute(){
 			selectionRange.end.column = 999999999;
 
 			var content = editor.session.getTextRange(selectionRange);
-			console.log(content)
 			var win = BrowserWindow.getFocusedWindow().webContents
 			win.webContents.executeJavaScript(content);	
 		}
@@ -65,7 +60,7 @@ function execute(){
 		selectionRange.end.column = 999999999;
 
 		content = editor.session.getTextRange(selectionRange);
-		console.log(content)
+// 		console.log(content)
 		var win = BrowserWindow.getFocusedWindow().webContents
 		win.webContents.executeJavaScript(content);	
 	}
@@ -79,6 +74,9 @@ require('electron').remote.globalShortcut.register('CommandOrControl+;', () => {
 })
 require('electron').remote.globalShortcut.register('CommandOrControl+o', () => {
 	open();
+})
+require('electron').remote.globalShortcut.register('CommandOrControl+w', () => {
+	open('scratch.js');
 })
 require('electron').remote.globalShortcut.register('CommandOrControl+s', () => {
 	save();

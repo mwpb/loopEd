@@ -39,16 +39,16 @@ function open(filepath = ""){
 			var filename = filenames[0];
 			open(filename);
 		})
+		return;
 	}
-	else if (editSessions[filepath]) {
+	else if (filepath.startsWith('/') == false) {
+			loc = window.location.pathname
+			filepath = loc.substring(0, loc.lastIndexOf('/'))+'/'+filepath
+		}
+	if (editSessions[filepath]) {
         changeSession(filepath);
     }
     else {
-		if (filepath.startsWith('/') == false) {
-			loc = window.location.pathname
-			filepath = loc.substring(0, loc.lastIndexOf('/'))+'/'+filepath
-			console.log(filepath)
-		}
    		var editor = currentEditor
 		var titleDiv = document.getElementById(editor.container.id+'Title')
 		titleDiv.innerHTML = filepath
