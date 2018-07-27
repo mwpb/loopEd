@@ -2,8 +2,7 @@ var fs = require('electron').remote.require('fs');
 const {dialog, BrowserWindow} = require('electron').remote;
 
 function write(filepath, filestring) {
-	print(filepath)
-	print(filestring)
+	print('Saving: '+filepath)
 	fs.writeFileSync(filepath, filestring);
 }
 

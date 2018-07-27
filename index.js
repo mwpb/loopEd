@@ -4,9 +4,35 @@ const path = require('path')
 const url = require('url')
 var ipcMain = require('electron').ipcMain;
 
+function full_reload(){
+    app.relaunch();
+    app.exit(0);
+}
+
 var template = [{},{
 	label:'File',
-	submenu:[{
+	submenu:[
+		{
+			label:'Copy',
+			accelerator:'CommandOrControl+c',
+			role:'copy'
+		},
+		{
+			label:'Paste',
+			accelerator:'CommandOrControl+v',
+			role:'paste'
+		},
+		{
+			label:'Cut',
+			accelerator:'CommandOrControl+x',
+			role:'cut'
+		},
+		{
+			label:'Full Reload',
+			accelerator:'CommandOrControl+Shift+r',
+			click:full_reload
+		},
+		{
 		label:'Toggle Dev Tools',
 		role:'toggleDevTools'
 	},

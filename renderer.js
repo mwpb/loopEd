@@ -1,7 +1,7 @@
 const {readFileAsync, read, write} = require('./fileUtils.js');
 const {dialog, BrowserWindow} = require('electron').remote;
 const {createED, open, save} = require('./ed.js');
-const Menu = require('electron').remote.Menu
+const Menu = require('electron').remote.Menu;
 
 function print(messagestring){
 	console.log(messagestring);
@@ -76,6 +76,12 @@ require('electron').remote.globalShortcut.register('CommandOrControl+Enter', () 
 })
 require('electron').remote.globalShortcut.register('CommandOrControl+;', () => {
 	require('electron').remote.getCurrentWindow().devToolsWebContents.focus();
+})
+require('electron').remote.globalShortcut.register('CommandOrControl+o', () => {
+	open();
+})
+require('electron').remote.globalShortcut.register('CommandOrControl+s', () => {
+	save();
 })
 
 var main = document.getElementById('main');
